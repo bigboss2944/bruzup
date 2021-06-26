@@ -50,3 +50,8 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+/Maquettes_v2.pdf
+/Maquettes.bmpr
+/Maquettes.pdf
+/Maquettes_HighScreen_v2.pdf
+/.idea/vcs.xml

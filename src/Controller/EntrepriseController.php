@@ -41,6 +41,7 @@ class EntrepriseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $commercant= $repoUser->findOneBy(['username'=>$username]);
             $entreprise->setUser($commercant);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($entreprise);
             $entityManager->flush();

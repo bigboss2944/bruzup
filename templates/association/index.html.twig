@@ -3,10 +3,11 @@
 {% block title %}Hello AssociationController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
 
     <div class="input-group searchbar">
         <div class="input-group-button">
@@ -19,19 +20,21 @@
     </div>
 
 
-<div class="actu-asso">
-    <p name="actu-asso" ondrop="" > Actualité de l'asso : <br> Quelques mots du bureau de Bruz'UP pour vous présenter la dynamique commerçante et artisane Bruzoise 💪❤...
+    <div class="row align-center" onload="galleryPhoto()">
+        <div class="product-image-gallery">
+            <img class="pdp-product-image" id="main-product-image" src="images/CV_mini.jpg" alt="">
+            <br>
+            <ul class="menu product-thumbs align-center">
+                <li> <a class="sim-thumb" data-image="https://placehold.it/350x350?text=Image+1"><img src="images/CV_mini.jpg" alt=""></a> </li>
+                <li> <a class="sim-thumb" data-image="https://placehold.it/350x350?text=Image+2"><img src="images/pc.jpg" alt=""></a> </li>
+                <li> <a class="sim-thumb" data-image="https://placehold.it/350x350?text=Image+3"><img src="images/CV_mini.jpg" alt=""></a> </li>
+            </ul>
+        </div>
+    </div>
 
-        ... Mais aussi vous remercier de votre soutien, de ce que chacun de vous avez créé, tout au long de cette année incroyable, autour des commerces et des commerçants 👌
 
-        Pas mal de bas mais aussi beaucoup de hauts ... vous avez un ❤ gros comme ça !!! Une sacrée aventure humaine !
-
-        A partager sans modération 🙂
-
-        🌿Merci au Crédit Agricole et plus particulièrement Sophie Lizé ainsi qu'à Renan, étudiant à l'école d'audiovisuel de Ker Lann pour la réalisation de ce film🌿</p>
-</div>
-    <div class="categories">
-        <p name="actu-asso" ondrop=""> Actualité de l'asso : <br> Quelques mots du bureau de Bruz'UP pour vous présenter la dynamique commerçante et artisane Bruzoise 💪❤...
+    <div class="actu-asso">
+        <p name="actu-asso" ondrop="" > Actualité de l'asso : <br> Quelques mots du bureau de Bruz'UP pour vous présenter la dynamique commerçante et artisane Bruzoise 💪❤...
 
             ... Mais aussi vous remercier de votre soutien, de ce que chacun de vous avez créé, tout au long de cette année incroyable, autour des commerces et des commerçants 👌
 
@@ -40,6 +43,20 @@
             A partager sans modération 🙂
 
             🌿Merci au Crédit Agricole et plus particulièrement Sophie Lizé ainsi qu'à Renan, étudiant à l'école d'audiovisuel de Ker Lann pour la réalisation de ce film🌿</p>
+    </div>
+    <div class="categories">
+        <div class="rowCategores row align-center">
+            <button type="button" class="button">Restaurant</button>
+            <button type="button" class="button">Alimentation</button>
+            <button type="button" class="button">Coiffeur</button>
+            <button type="button" class="button">Sport</button>
+            <button type="button" class="button">Culture</button>
+            <button type="button" class="button">Sport</button>
+            <button type="button" class="button">Culture</button>
+        </div>
+
+
+
     </div>
     <div class="search-result">
         <p name="actu-asso" ondrop=""> Actualité de l'asso : <br> Quelques mots du bureau de Bruz'UP pour vous présenter la dynamique commerçante et artisane Bruzoise 💪❤...

@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Entreprise
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(name="id",type="integer", nullable=false)
@@ -104,6 +106,26 @@ class Entreprise
      * @ORM\JoinColumn(nullable=false,referencedColumnName="username")
      */
     private $user;
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity=Categorie::class)
+     * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
+     */
+    private $categorie;
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
 
     public function getUser(): ?User
     {

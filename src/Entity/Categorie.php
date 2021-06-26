@@ -28,6 +28,13 @@ class Categorie
      */
     private $nom;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity=Entreprise::class,mappedBy="id")
+     * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
+     */
+    private $entreprises;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -43,6 +50,10 @@ class Categorie
         $this->nom = $nom;
 
         return $this;
+    }
+
+    public function __toString(){
+        return $this->nom;
     }
 
 
