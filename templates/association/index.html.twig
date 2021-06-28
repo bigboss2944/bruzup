@@ -69,4 +69,27 @@
 
             🌿Merci au Crédit Agricole et plus particulièrement Sophie Lizé ainsi qu'à Renan, étudiant à l'école d'audiovisuel de Ker Lann pour la réalisation de ce film🌿</p>
     </div>
+    <div class="rowCategores row align-center">
+    {% for e in entreprises %}
+
+            <ul>
+                <li>{{ e.id }}</li>
+                <li>{{ e.nom }}</li>
+                <li>{{ e.rue }}</li>
+                <li>{{ e.codepostal }}</li>
+                <li>{{ e.ville }}</li>
+                <li>{{ e.telephone }}</li>
+                <li>{{ e.siteweb }}</li>
+                <li>{{ e.longdescription }}</li>
+                <li>{{ e.shortdescription }}</li>
+                <li>{{ e.email }}</li>
+                <li>{{ e.user }}</li>
+                <li>{{ e.categorie }}</li>
+            </ul>
+
+
+    {% endfor %}
+    </div>
+
+
 {% endblock %}

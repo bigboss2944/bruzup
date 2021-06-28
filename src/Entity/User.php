@@ -205,4 +205,8 @@ class User implements UserInterface
     {
         return $this->isVerified;
     }
+
+    public function __toString(){
+        return $this->nom;
+    }
 }

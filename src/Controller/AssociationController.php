@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,16 +24,12 @@ class AssociationController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(EntrepriseRepository $entrepriseRepository): Response
     {
-        $entreprises = $this->getDoctrine()
-            ->getRepository(Entreprise::class)
-            ->findAll();
-
 
         return $this->render('association/index.html.twig', [
             'controller_name' => 'AssociationController',
-            'entreprises' => $entreprises,
+            'entreprises' => $entrepriseRepository->findAll(),
         ]);
     }
 
