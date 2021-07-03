@@ -2,11 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="762c6d01-ac6d-4d39-b021-05999b48d37a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Repository/EntrepriseRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/association/images/1logo_bruz_up_noir_transpa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/association/images/CV_mini.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/association/images/laptop-336373_1920.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/association/images/pc.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/bruzup.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bruzup.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AssociationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AssociationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Entreprise.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/association/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/association/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +124,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
       <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
     </include_path>
   </component>
   <component name="ProjectId" id="1qf3RaiBWNOwysxJOg4bMIlCebR" />
@@ -123,11 +136,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Repository" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/association/images" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wamp64\www\Bruzup\bruzup\templates\association\images" />
       <recent name="D:\wamp64\www\Bruzup\bruzup\src\Repository" />
     </key>
   </component>
@@ -145,6 +159,7 @@
       <workItem from="1624391179288" duration="5248000" />
       <workItem from="1624715610426" duration="5912000" />
       <workItem from="1624901900097" duration="3089000" />
+      <workItem from="1625317236856" duration="13789000" />
     </task>
     <servers />
   </component>

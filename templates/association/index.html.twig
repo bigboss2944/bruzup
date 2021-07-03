@@ -4,10 +4,95 @@
 
 {% block body %}
 
+    <script type="text/javascript">
+
+        /***
+         * the role of this function is to deserialize the entreprise list,
+         * filter it by categorie
+         * and generate html element with entreprise element
+         * @param idCategorie
+         */
+
+        function filterByCategorie(idCategorie){
+            var obj ={{ entreprises|json_encode|raw }};
+            var myObject = eval('(' + obj + ')');//to deserialize entreprises
+
+            var entrepriseslisthtml = document.getElementById('listEntreprisesFiltered');
+            entrepriseslisthtml.innerHTML = ""; //to empty the element listEntreprisesFiltered
+
+            myObject.forEach((entreprise)=>{
+                var entrepriseElement = document.createElement("entreprise");
+                if(entreprise['categorie']['id']===idCategorie){ //if the entreprise categorie id matches idCategorie entered in parameters, the element listEntreprisesFiltered is fulfilled
+                    console.log(entreprise);
+                    var entrepriseNom = document.createElement("p");
+                    var entrepriseNomtext = document.createTextNode(entreprise['nom']);
+                    entrepriseNom.appendChild(entrepriseNomtext);
+                    entrepriseElement.appendChild(entrepriseNom);
+
+                    var shortDescription = document.createElement("p");
+                    var shortDescriptiontext = document.createTextNode(entreprise['shortdescription']);
+                    shortDescription.appendChild(shortDescriptiontext);
+                    entrepriseElement.appendChild(shortDescription);
+
+                    var adresse = document.createElement("p");
+                    var ruetext = document.createTextNode(entreprise['rue']+" ");
+                    var codepostaltext = document.createTextNode(entreprise['codepostal']+" ");
+                    var villetext = document.createTextNode(entreprise['ville']+" ");
+                    adresse.appendChild(ruetext);
+                    adresse.appendChild(codepostaltext);
+                    adresse.appendChild(villetext);
+                    entrepriseElement.appendChild(adresse);
+
+                    var telephone = document.createElement("p");
+                    var telephonetext = document.createTextNode(entreprise['telephone']);
+                    telephone.appendChild(telephonetext);
+                    entrepriseElement.appendChild(telephone);
+
+                    var mail = document.createElement("p");
+                    var mailtext = document.createTextNode(entreprise['email']);
+                    mail.appendChild(mailtext);
+                    entrepriseElement.appendChild(mail);
+
+                    var siteweb = document.createElement("p");
+                    var sitewebtext = document.createTextNode(entreprise['website']);
+                    siteweb.appendChild(sitewebtext);
+                    entrepriseElement.appendChild(siteweb);
+
+                    var categorieNom = document.createElement("p");
+                    var categorieNomtext = document.createTextNode(entreprise['categorie']['nom']);
+                    categorieNom.appendChild(categorieNomtext);
+                    entrepriseElement.appendChild(categorieNom);
+
+
+
+                }
+
+                entrepriseslisthtml.appendChild(entrepriseElement);
+                var tag2 = document.createElement("p");
+                var tag3 = document.createElement("p");
+                var tag4 = document.createElement("p");
+                var tag5 = document.createElement("p");
+                var tag6 = document.createElement("p");
+
+
+            })
+
+
+
+            //console.log(myObject[0]['categorie']);//for the First Element
+        }
+
+
+
+    </script>
+
+
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
+
+    <?php echo(entreprises) ?>
 
     <div class="input-group searchbar">
         <div class="input-group-button">
@@ -20,17 +105,28 @@
     </div>
 
 
-    <div class="row align-center" onload="galleryPhoto()">
+    <div class="row align-center">
+        <script type="text/javascript">
+
+            function galleryPhoto(){
+                $('.sim-thumb').on('click', function() {
+                    $('#main-product-image').attr('src', $(this).data('image'));
+                })
+            }
+
+        </script>
         <div class="product-image-gallery">
-            <img class="pdp-product-image" id="main-product-image" src="images/CV_mini.jpg" alt="">
+            <img class="pdp-product-image" id="main-product-image" src="images/pc.jpg" alt="">
             <br>
             <ul class="menu product-thumbs align-center">
-                <li> <a class="sim-thumb" data-image="https://placehold.it/350x350?text=Image+1"><img src="images/CV_mini.jpg" alt=""></a> </li>
-                <li> <a class="sim-thumb" data-image="https://placehold.it/350x350?text=Image+2"><img src="images/pc.jpg" alt=""></a> </li>
-                <li> <a class="sim-thumb" data-image="https://placehold.it/350x350?text=Image+3"><img src="images/CV_mini.jpg" alt=""></a> </li>
+                <li> <a class="sim-thumb" data-image="images/pc.jpg"><img src="images/pc.jpg" alt=""></a> </li>
+                <li> <a class="sim-thumb" data-image="images/laptop-336373_1920.jpg"><img src="images/laptop-336373_1920.jpg" alt=""></a> </li>
+                <li> <a class="sim-thumb" data-image="images/1logo_bruz_up_noir_transpa.png"><img src="images/1logo_bruz_up_noir_transpa.png" alt=""></a> </li>
             </ul>
         </div>
     </div>
+
+
 
 
     <div class="actu-asso">
@@ -46,50 +142,44 @@
     </div>
     <div class="categories">
         <div class="rowCategores row align-center">
-            <button type="button" class="button">Restaurant</button>
-            <button type="button" class="button">Alimentation</button>
-            <button type="button" class="button">Coiffeur</button>
-            <button type="button" class="button">Sport</button>
-            <button type="button" class="button">Culture</button>
-            <button type="button" class="button">Sport</button>
-            <button type="button" class="button">Culture</button>
+            <button type="button" class="button" onclick="filterByCategorie(1)">Culture et Loisirs</button>
+            <button type="button" class="button" onclick="filterByCategorie(2)">Alimentation</button>
+            <button type="button" class="button" onclick="filterByCategorie(3)">Beaute et sante</button>
+            <button type="button" class="button" onclick="filterByCategorie(4)">Hotellerie</button>
+            <button type="button" class="button" onclick="filterByCategorie(5)">Shopping</button>
+            <button type="button" class="button" onclick="filterByCategorie(6)">Restaurant</button>
+            <button type="button" class="button" onclick="filterByCategorie(7)">Services</button>
         </div>
 
 
 
     </div>
-    <div class="search-result">
-        <p name="actu-asso" ondrop=""> Actualité de l'asso : <br> Quelques mots du bureau de Bruz'UP pour vous présenter la dynamique commerçante et artisane Bruzoise 💪❤...
 
-            ... Mais aussi vous remercier de votre soutien, de ce que chacun de vous avez créé, tout au long de cette année incroyable, autour des commerces et des commerçants 👌
-
-            Pas mal de bas mais aussi beaucoup de hauts ... vous avez un ❤ gros comme ça !!! Une sacrée aventure humaine !
-
-            A partager sans modération 🙂
-
-            🌿Merci au Crédit Agricole et plus particulièrement Sophie Lizé ainsi qu'à Renan, étudiant à l'école d'audiovisuel de Ker Lann pour la réalisation de ce film🌿</p>
-    </div>
-    <div class="rowCategores row align-center">
-    {% for e in entreprises %}
-
-            <ul>
-                <li>{{ e.id }}</li>
-                <li>{{ e.nom }}</li>
-                <li>{{ e.rue }}</li>
-                <li>{{ e.codepostal }}</li>
-                <li>{{ e.ville }}</li>
-                <li>{{ e.telephone }}</li>
-                <li>{{ e.siteweb }}</li>
-                <li>{{ e.longdescription }}</li>
-                <li>{{ e.shortdescription }}</li>
-                <li>{{ e.email }}</li>
-                <li>{{ e.user }}</li>
-                <li>{{ e.categorie }}</li>
-            </ul>
+    <div class="rowCategores row align-center" id="listEntreprisesFiltered">
 
 
-    {% endfor %}
+        {#    {% for e in entreprises %}#}
+
+{#            <ul>#}
+{#                <li>{{ e.id }}</li>#}
+{#                <li>{{ e.nom }}</li>#}
+{#                <li>{{ e.rue }}</li>#}
+{#                <li>{{ e.codepostal }}</li>#}
+{#                <li>{{ e.ville }}</li>#}
+{#                <li>{{ e.telephone }}</li>#}
+{#                <li>{{ e.siteweb }}</li>#}
+{#                <li>{{ e.longdescription }}</li>#}
+{#                <li>{{ e.shortdescription }}</li>#}
+{#                <li>{{ e.email }}</li>#}
+{#                <li>{{ e.user }}</li>#}
+{#                <li>{{ e.categorie }}</li>#}
+{#            </ul>#}
+
+
+{#    {% endfor %}#}
     </div>
 
 
 {% endblock %}
+
+

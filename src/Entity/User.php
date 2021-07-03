@@ -64,6 +64,7 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+    private $id;
 
     public function getId(): ?int
     {

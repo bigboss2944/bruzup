@@ -114,6 +114,7 @@ class Entreprise
      * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
      */
     private $categorie;
+    private $idlogo;
 
     public function getCategorie(): ?Categorie
     {
