@@ -15,10 +15,19 @@ class User implements UserInterface
 {
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="username", type="string", length=50, nullable=false)
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="id",type="integer", nullable=false)
+     */
+    private $id;
+
+
+    /**
+     * @var string
+     * @ORM\Column(name="username", type="string", length=50, nullable=false)
+     * 
      *
      */
     private $username;
@@ -64,7 +73,12 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
-    private $id;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Entreprise::class, mappedBy="user")
+     */
+    private $entreprises;
 
     public function getId(): ?int
     {

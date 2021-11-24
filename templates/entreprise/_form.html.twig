@@ -1,4 +1,17 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+{{ form_start(formEntreprise) }}
+    {{ form_widget(formEntreprise) }}
+
+    {% if app.request.get('_route')=='entreprise_edit' %}
+        <h2>Images</h2>
+
+        {% for image in entreprise.images %}
+            <div>
+                <img src="{{asset('/uploads/' ~ image.name)}}" alt="Image" width="150">
+                <a href="{{path('entreprise_delete_image',{'id': image.id}) }}"
+                data-delete data-token="{{csrf_token('delete' ~ image.id) }}"> Supprimer </a>
+
+            </div>
+        {% endfor %}
+    {% endif %}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_end(formEntreprise) }}

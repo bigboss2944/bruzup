@@ -1,34 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entreprise index{% endblock %}
+{% block title %}Welcome User{% endblock %}
 
-{% block body %}
-    <h1>Entreprise index</h1>
+{% block body%}
+    <h1>Mes entreprises</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-{#                <th>Idlogo</th>#}
-                
-                <th>Nom</th>
-                <th>Rue</th>
-                <th>Codepostal</th>
-                <th>Ville</th>
-                <th>Telephone</th>
-                <th>Siteweb</th>
-                <th>Longdescription</th>
-                <th>Shortdescription</th>
-                <th>Email</th>
-                <th>actions</th>
+                <th>nom</th>
+                <th>rue</th>
+                <th>codepostal</th>
+                <th>ville</th>
+                <th>telephone</th>
+                <th>siteweb</th>
+                <th>longdescription</th>
+                <th>shortdescription</th>
+                <th>categorie</th>
+                <th>email</th>
             </tr>
         </thead>
         <tbody>
         {% for entreprise in entreprises %}
             <tr>
-                <td>{{ entreprise.id }}</td>
-{#                <td>{{ entreprise.idlogo }}</td>#}
-                
                 <td>{{ entreprise.nom }}</td>
                 <td>{{ entreprise.rue }}</td>
                 <td>{{ entreprise.codepostal }}</td>
@@ -37,6 +31,7 @@
                 <td>{{ entreprise.siteweb }}</td>
                 <td>{{ entreprise.longdescription }}</td>
                 <td>{{ entreprise.shortdescription }}</td>
+                <td>{{ entreprise.categorie }}</td>
                 <td>{{ entreprise.email }}</td>
                 <td>
                     <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">show</a>
@@ -45,11 +40,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="13">no records found</td>
+                <td colspan="9">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('entreprise_new', {'username': app.user.username})}}">Create new</a>
+    <a href="{{ path('entreprise_new',{'username': app.user.username}) }}">Create new</a>
 {% endblock %}

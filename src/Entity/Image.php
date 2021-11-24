@@ -24,45 +24,62 @@ class Image
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=100, nullable=true)
+     * @ORM\Column(name="texteAccompagnement", type="string", length=255, nullable=true)
      */
-    private $description;
+    private $texteAccompagnement;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $url;
+    private $name;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity=Entreprise::class,inversedBy="images")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $entreprises;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDescription(): ?string
+    public function getTexteAccompagnement(): ?string
     {
-        return $this->description;
+        return $this->texteAccompagnement;
     }
 
-    public function setDescription(?string $description): self
+    public function setTexteAccompagnement(?string $texteAccompagnement): self
     {
-        $this->description = $description;
+        $this->texteAccompagnement = $texteAccompagnement;
 
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getName(): ?string
     {
-        return $this->url;
+        return $this->name;
     }
 
-    public function setUrl(string $url): self
+    public function setName(string $name): self
     {
-        $this->url = $url;
+        $this->name = $name;
 
         return $this;
     }
 
+    public function getEntreprises(): ?Entreprise
+    {
+        return $this->entreprises;
+    }
 
+    public function setEntreprises(?Entreprise $entreprise): self
+    {
+        $this->entreprises = $entreprise;
+
+        return $this;
+    }
 }

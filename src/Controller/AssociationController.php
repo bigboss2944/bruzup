@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Entity\User;
 use App\Repository\EntrepriseRepository;
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,15 +26,18 @@ class AssociationController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(EntrepriseRepository $entrepriseRepository): Response
+    public function index(EntrepriseRepository $entrepriseRepository, ImageRepository $imageRepository): Response
     {
         $entreprises = $entrepriseRepository->findAll();
-        $serializer = $this->get('serializer');
-        $jsonEntreprises = $serializer->serialize($entreprises,'json'); //entrepriseList is serialized in order to be able to filter it by categorie
+        $images = $imageRepository->findAll();
+        //$serializer = $this->get('serializer');
+        // $jsonEntreprises = $serializer->serialize($entreprises,'json'); //entrepriseList is serialized in order to be able to filter it by categorie
 
         return $this->render('association/index.html.twig', [
             'controller_name' => 'AssociationController',
-            'entreprises' => $jsonEntreprises,
+            'entreprises' => $entreprises,
+            'images' => $images,
+            'user' => new User,
         ]);
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,12 +32,7 @@ class Entreprise
 //     */
 //    private $idlogo;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=50, nullable=false)
-     */
-    private $password;
+    
 
     /**
      * @var string
@@ -102,19 +99,25 @@ class Entreprise
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false,referencedColumnName="username")
+     * @ORM\ManyToOne(targetEntity=User::class,inversedBy="entreprises")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity=Categorie::class)
-     * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity=Categorie::class,inversedBy="entreprises")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
-    private $idlogo;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity=Image::class,mappedBy="entreprises",orphanRemoval=true, cascade={"persist"})
+     * 
+     */
+    private $images;
 
     public function getCategorie(): ?Categorie
     {
@@ -145,22 +148,19 @@ class Entreprise
         return $this->id;
     }
 
-    public function getIdlogo(): ?int
-    {
-        return $this->idlogo;
-    }
+    // public function getPhotos(): ?int
+    // {
+    //     return $this->images;
+    // }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+    // public function setPhotos(?Image $image): self
+    // {
+    //     $this->image = $images;
 
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
+    //     return $this;
+    // }
 
-        return $this;
-    }
+    
 
     public function getNom(): ?string
     {
@@ -270,6 +270,33 @@ class Entreprise
         return $this;
     }
     
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setEntreprises($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getEntreprises() === $this) {
+                $image->setEntreprises(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 }

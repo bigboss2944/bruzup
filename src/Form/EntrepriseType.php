@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntrepriseType extends AbstractType
@@ -18,7 +19,7 @@ class EntrepriseType extends AbstractType
         $builder
             //->add('id')
             //->add('idlogo')
-            ->add('password')
+            
             ->add('nom')
             ->add('rue')
             ->add('codepostal')
@@ -33,7 +34,14 @@ class EntrepriseType extends AbstractType
                 'class'=>Categorie::class,
                 'placeholder'=>'Entrer la catégorie',
 
-            ]);
+            ])
+            ->add('images', FileType::class, [
+                'label' => false,
+                'multiple'=> true,
+                'mapped' => false,
+                'required' => false,
+            ])
+            ;
         $builder ->get('categorie')->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event){

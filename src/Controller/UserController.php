@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Entreprise;
 use App\Form\User1Type;
 use App\Form\UserType;
+use App\Form\EntrepriseType;
 use App\Repository\UserRepository;
+use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +47,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/new.html.twig', [
-            'user' => $user,
+            
             'form' => $form->createView(),
         ]);
     }
@@ -62,12 +65,21 @@ class UserController extends AbstractController
     /**
      * @Route("/{username}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, Entreprise $entreprise, EntrepriseRepository $repoEntreprise): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $formUser = $this->createForm(UserType::class, $user);
+        $formUser->handleRequest($request);
+        $formEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
+        $formEntreprise->handleRequest($request);
+        $entreprise=$repoEntreprise->findBy(['user' => $user ]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formUser->isSubmitted() && $formUser->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_index');
+        }
+
+        if ($formEntreprise->isSubmitted() && $formEntreprise->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index');
@@ -75,7 +87,9 @@ class UserController extends AbstractController
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'entreprise' => $entreprise,
+            'formUser' => $formUser->createView(),
+            'formEntreprise' => $formEntreprise->createView(),
         ]);
     }
 
@@ -92,4 +106,5 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
 }

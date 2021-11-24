@@ -103,6 +103,15 @@
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.5.1"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -398,6 +407,9 @@
     "symfony/serializer": {
         "version": "v5.2.11"
     },
+    "symfony/serializer-pack": {
+        "version": "v1.0.4"
+    },
     "symfony/service-contracts": {
         "version": "v2.2.0"
     },
@@ -508,5 +520,8 @@
     },
     "twig/twig": {
         "version": "v3.3.0"
+    },
+    "webmozart/assert": {
+        "version": "1.10.0"
     }
 }

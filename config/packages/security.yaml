@@ -30,14 +30,14 @@ security:
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
-                path: /
+                path: list_entreprise_by_user
                 name: remember_me
                 domain: ~ # Defaults to the current domain from $_SERVER
                 # by default, the feature is enabled by checking a
                 # checkbox in the login form (see below), uncomment the
                 # following line to always enable it.
                 always_remember_me: true
-
+            
 
             logout:
                 path: app_logout

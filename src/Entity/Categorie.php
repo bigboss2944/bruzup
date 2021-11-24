@@ -18,6 +18,9 @@ class Categorie
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * ORM\OneToMany(targetEntity=Entreprise::class,mappedBy="id")
+     * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
+     * 
      */
     private $id;
 
@@ -30,8 +33,7 @@ class Categorie
 
     /**
      *
-     * @ORM\OneToMany(targetEntity=Entreprise::class,mappedBy="id")
-     * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity=Entreprise::class,mappedBy="categorie")
      */
     private $entreprises;
 
