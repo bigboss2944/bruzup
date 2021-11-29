@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Entity\User;
 use App\Entity\Image;
 use App\Form\EntrepriseType;
 use App\Repository\UserRepository;
+use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,12 +41,17 @@ class EntrepriseController extends AbstractController
     /**
      * @Route("/{username}", name="list_entreprise_by_user", methods={"GET"})
      */
-    public function listEntrepriseByUser(string $username): Response
+    public function listEntrepriseByUser(string $username,EntrepriseRepository $entrepriseRepo , UserRepository $userRepo): Response
     {
+        $user = new User();
+
+        $user = $userRepo->findOneBy(['username'=>$username]);
+        $entreprises = $entrepriseRepo->findBy(['user'=>$user->getId()]);
         
-        $entreprises = $this->getDoctrine()
-            ->getRepository(Entreprise::class)
-            ->findBy(['user'=>$username]);
+        
+        // $entreprises = $this->getDoctrine()
+        //     ->getRepository(Entreprise::class)
+        //     ->findBy(['user'=>$user->getId()]);
 
         return $this->render('entreprise/welcome.html.twig', [
             'entreprises' => $entreprises,
@@ -86,25 +93,21 @@ class EntrepriseController extends AbstractController
     public function new($username,Request $request, UserRepository $repoUser): Response
     {
         $entreprise = new Entreprise();
-        $form = $this->createForm(EntrepriseType::class, $entreprise);
-        $form->handleRequest($request);
+        $formEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
+        $formEntreprise->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            //Récupération des images transmises
-            $images = $form->get('images')->getData();
+        if ($formEntreprise->isSubmitted() && $formEntreprise->isValid()) {
+            $images = $formEntreprise->get('images')->getData();
             foreach ($images as $image) {
                 # code...
                 //Génération du nom de fichier
-                $fichier = md5(uniqui()) . '.' . $image->guessExtension();
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
                 //On copie le fichier dans le dossier Upload
                 $image->move(
                     $this->getParameter('images_directory'),
                     $fichier
                 );
-                $name=getParameter('images_directory').'/'.$fichier;
                 
-
                 //Stockage du nom de l'image dans la base de données
                 $img = new Image();
                 $img->setName($fichier);
@@ -112,19 +115,20 @@ class EntrepriseController extends AbstractController
                 
             }
 
-            $commercant= $repoUser->findOneBy(['username'=>$username]);
-            $entreprise->setUser($commercant);
+            $entreprise->setUser($repoUser->findOneBy(['username'=>$username]));
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($entreprise);
             $entityManager->flush();
 
             return $this->redirectToRoute('entreprise_index');
+
         }
 
         return $this->render('entreprise/new.html.twig', [
             'entreprise' => $entreprise,
-            'form' => $form->createView(),
+            'formEntreprise' => $formEntreprise->createView(),
         ]);
     }
 

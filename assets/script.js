@@ -69,18 +69,33 @@ window.onload = () => {
                 )
             .then(data => {
                 
-
+                listEntreprisesFiltered.innerHTML="";
                 console.log(data);
+
+
+
+                
                 var arr_from_json = JSON.parse(data);
-                console.log(arr_from_json[0]);
+                console.log(arr_from_json.length);
+
+                if(arr_from_json.length==0){
+                    var pTextError = document.createElement("p");
+                    var textError = document.createTextNode("Aucun commerce ne correspond à cet catégorie");         // Create a text node
+                    pTextError.appendChild(textError);
+                    listEntreprisesFiltered.appendChild(pTextError);
+                }
                 
                 for(let entreprise of arr_from_json){
+
+                    var entreprises = document.createElement("div");
+                    entreprises.setAttribute('class','row');
+                    listEntreprisesFiltered.appendChild(entreprises);
                     var imgDiv = document.createElement("div");
                     imgDiv.setAttribute('class','col');
                     var infoEntrepriseDiv = document.createElement("div");
                     infoEntrepriseDiv.setAttribute('class','col');
-                    listEntreprisesFiltered.appendChild(imgDiv);
-                    listEntreprisesFiltered.appendChild(infoEntrepriseDiv);
+                    entreprises.appendChild(imgDiv);
+                    entreprises.appendChild(infoEntrepriseDiv);
                     var img=document.createElement("img");
                     imgDiv.appendChild(img);
                     

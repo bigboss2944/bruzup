@@ -13,13 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
  */
 class UserController extends AbstractController
 {
-    /**
+    /**@IsGranted("ROLE_ADMIN")
      * @Route("/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
@@ -48,7 +49,7 @@ class UserController extends AbstractController
 
         return $this->render('user/new.html.twig', [
             
-            'form' => $form->createView(),
+            'formUser' => $form->createView(),
         ]);
     }
 
@@ -65,31 +66,39 @@ class UserController extends AbstractController
     /**
      * @Route("/{username}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, Entreprise $entreprise, EntrepriseRepository $repoEntreprise): Response
+    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user, EntrepriseRepository $repoEntreprise): Response
     {
         $formUser = $this->createForm(UserType::class, $user);
         $formUser->handleRequest($request);
-        $formEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
-        $formEntreprise->handleRequest($request);
+        // $formEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
+        // $formEntreprise->handleRequest($request);
         $entreprise=$repoEntreprise->findBy(['user' => $user ]);
 
         if ($formUser->isSubmitted() && $formUser->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $formUser->get('plainPassword')->getData()
+                )
+                );
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index');
         }
 
-        if ($formEntreprise->isSubmitted() && $formEntreprise->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        // if ($formEntreprise->isSubmitted() && $formEntreprise->isValid()) {
+        //     $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index');
-        }
+        //     return $this->redirectToRoute('user_index');
+        // }
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
-            'entreprise' => $entreprise,
+            // 'entreprise' => $entreprise,
             'formUser' => $formUser->createView(),
-            'formEntreprise' => $formEntreprise->createView(),
+            // 'formEntreprise' => $formEntreprise->createView(),
         ]);
     }
 

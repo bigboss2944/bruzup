@@ -277,10 +277,17 @@ class Entreprise
 
     public function addImage(Image $image): self
     {
-        if (!$this->images->contains($image)) {
+        if($this->images!=null){
+            if (!in_array($image, $this->images)) {
+                $this->images[] = $image;
+                $image->setEntreprises($this);
+            }
+        }
+        else{
             $this->images[] = $image;
             $image->setEntreprises($this);
         }
+        
 
         return $this;
     }
