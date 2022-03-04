@@ -94,7 +94,9 @@ class CustomAuthenticator extends AbstractFormLoginAuthenticator implements Pass
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('user_index'));
+        
+
+        return new RedirectResponse($this->urlGenerator->generate('list_entreprise_by_user',array('username'=>$request->request->get('username'))));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

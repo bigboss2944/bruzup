@@ -5,9 +5,6 @@
 {% block body %}
 
     <div class="container-fluid">
-
-        
-
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -19,14 +16,18 @@
                 {% for image in images %}
                     {% if count == 0 %}
                         <div class="carousel-item active ">
-                            <img src="{{ asset('/uploads/')~image.name}}" class="d-block" alt="premier photo">
-                            <text class="texteAccompagnement">{{image.texteAccompagnement}} </text>
+                            <img src="{{asset('/uploads/')~image.name}}" class="d-block" alt="premier photo">
+                                <div class="texteAccompagnement">{{image.texteAccompagnement}} </div>
+                            </img>
+                            
                         </div>
                         {% set count = count + 1 %}
                     {% else %}
                         <div class="carousel-item ">
                             <img src="{{asset('/uploads/')~image.name}}" class="d-block" alt="premier photo">
-                            <text class="texteAccompagnement">{{image.texteAccompagnement}} </text>
+                            <div class="texteAccompagnement">{{image.texteAccompagnement}} </div>
+                            </img>
+                            
                         </div>
                     {% endif %}
 
@@ -55,8 +56,8 @@
 
                 🌿Merci au Crédit Agricole et plus particulièrement Sophie Lizé ainsi qu'à Renan, étudiant à l'école d'audiovisuel de Ker Lann pour la réalisation de ce film🌿</p>
         </div>
-        <div class="categories">
-            <div class="rowCategores row align-center">
+        <div class="row categories">
+            <div class="rowCategories row">
                 <button name="1" type="button" class="button" href="{{ path('list_entreprise_by_categorie', {'idCategorie': 1}) }}">Culture et Loisirs</button>
                 <button name="2" type="button" class="button" href="{{ path('list_entreprise_by_categorie', {'idCategorie': 2}) }}">Alimentation</button>
                 <button name="3" type="button" class="button" href="{{ path('list_entreprise_by_categorie', {'idCategorie': 3}) }}">Beaute et sante</button>
@@ -65,12 +66,12 @@
                 <button name="6" type="button" class="button" href="{{ path('list_entreprise_by_categorie', {'idCategorie': 6}) }}">Restaurant</button>
                 <button name="7" type="button" class="button" href="{{ path('list_entreprise_by_categorie', {'idCategorie': 7}) }}">Services</button>
             </div>
+            <div class="listEntreprisesFiltered row align-center" id="listEntreprisesFiltered">
 
+            </div>
         </div>
 
-        <div class="rowCategores row align-center" id="listEntreprisesFiltered">
-
-        </div>
+        
     </div>
 
 

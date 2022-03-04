@@ -1,3 +1,43 @@
+.texteAccompagnement{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.entreprises{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.imgEntrepriseDiv{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.infoEntrepriseDiv{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.navbar{
+    background-color: #f8b83f;
+}
+
+.listEntreprisesFiltered{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.rowCategories{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
 body{
     background: #259896;
 }
@@ -37,7 +77,19 @@ svg {
 }
 
 .button{
-    width: 100px;
+    width: 115px;
     height: 100px;
     background-color: #f8b83f;
+}
+
+img{
+    width: 50%;
+   margin: auto;
+    
+}
+
+.imgPresentationEntreprise{
+    width: 75%;
+   margin: auto;
+    
 }

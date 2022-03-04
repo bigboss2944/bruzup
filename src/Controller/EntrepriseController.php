@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -25,7 +27,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 class EntrepriseController extends AbstractController
 {
     /**
-     * @Route("/", name="entreprise_index", methods={"GET"})
+     * @Route("/index", name="entreprise_index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -39,15 +41,16 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/{username}", name="list_entreprise_by_user", methods={"GET"})
+     * 
+     * @Route("/ListEntrepriseByUser/{username}", name="list_entreprise_by_user", methods={"GET"})
      */
     public function listEntrepriseByUser(string $username,EntrepriseRepository $entrepriseRepo , UserRepository $userRepo): Response
     {
         $user = new User();
 
         $user = $userRepo->findOneBy(['username'=>$username]);
+
         $entreprises = $entrepriseRepo->findBy(['user'=>$user->getId()]);
-        
         
         // $entreprises = $this->getDoctrine()
         //     ->getRepository(Entreprise::class)

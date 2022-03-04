@@ -71,10 +71,6 @@ window.onload = () => {
                 
                 listEntreprisesFiltered.innerHTML="";
                 console.log(data);
-
-
-
-                
                 var arr_from_json = JSON.parse(data);
                 console.log(arr_from_json.length);
 
@@ -88,16 +84,16 @@ window.onload = () => {
                 for(let entreprise of arr_from_json){
 
                     var entreprises = document.createElement("div");
-                    entreprises.setAttribute('class','row');
+                    entreprises.setAttribute('class','row entreprises');
                     listEntreprisesFiltered.appendChild(entreprises);
-                    var imgDiv = document.createElement("div");
-                    imgDiv.setAttribute('class','col');
+                    var imgEntrepriseDiv = document.createElement("div");
+                    imgEntrepriseDiv.setAttribute('class','col imgEntrepriseDiv');
                     var infoEntrepriseDiv = document.createElement("div");
-                    infoEntrepriseDiv.setAttribute('class','col');
-                    entreprises.appendChild(imgDiv);
+                    infoEntrepriseDiv.setAttribute('class','col infoEntrepriseDiv');
+                    entreprises.appendChild(imgEntrepriseDiv);
                     entreprises.appendChild(infoEntrepriseDiv);
                     var img=document.createElement("img");
-                    imgDiv.appendChild(img);
+                    imgEntrepriseDiv.appendChild(img);
                     
                     
                     img.setAttribute('alt',entreprise.images[0].texteAccompagnement);
