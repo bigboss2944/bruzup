@@ -24,15 +24,31 @@
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                             
-                            <li class="nav-item">
-                                {% if app.user != null %}
+                            {% if app.user != null %}
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{path('list_entreprise_by_user', {'username': app.user.username})}}" tabindex="-1" aria-disabled="true">Mon espace</a>
+
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{path('app_logout')}}" tabindex="-1" aria-disabled="true">Me déconnecter</a>
-                                {% else %}
-                                    <a class="nav-link" href="{{path('app_login')}}" tabindex="-1" aria-disabled="true">Me connecter</a>
+
+                                </li>
+
+                                {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{path('user_index')}}" tabindex="-1" aria-disabled="true">Espace admin</a>
+
+                                    </li>
+
                                 {% endif %}
-                                
-                            </li>
+
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{path('app_login')}}" tabindex="-1" aria-disabled="true">Me connecter</a>
+                                </li>
+
+                            {% endif %}
+                            
                         </ul>
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
